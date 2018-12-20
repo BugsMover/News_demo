@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/meizi_item_big"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="6dp">
+
+    <ImageView
+        android:id="@+id/meizi_item_big_image"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/meizi" />
+
+    <TextView
+        android:id="@+id/meizi_item_big_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="油耗气死加油站老板 亚洲龙混动版来了"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meizi_item_big_image" />
+
+    <ImageView
+        android:id="@+id/meizi_item_big_name_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:tint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meizi_item_big_title"
+        app:srcCompat="@drawable/newinfo" />
+
+    <TextView
+        android:id="@+id/meizi_item_big_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="网易汽车"
+        app:layout_constraintBottom_toBottomOf="@+id/meizi_item_big_name_icon"
+        app:layout_constraintStart_toEndOf="@+id/meizi_item_big_name_icon"
+        app:layout_constraintTop_toTopOf="@+id/meizi_item_big_name_icon" />
+
+    <ImageView
+        android:id="@+id/meizi_item_big_favorites_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:tint="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/meizi_item_big_name"
+        app:layout_constraintTop_toBottomOf="@+id/meizi_item_big_title"
+        app:srcCompat="@drawable/type" />
+
+    <TextView
+        android:id="@+id/meizi_item_big_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="汽车"
+        app:layout_constraintBaseline_toBaselineOf="@+id/meizi_item_big_name"
+        app:layout_constraintStart_toEndOf="@+id/meizi_item_big_favorites_icon" />
+
+    <ImageView
+        android:id="@+id/meizi_item_big_comments_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:tint="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/meizi_item_big_favorites"
+        app:layout_constraintTop_toBottomOf="@+id/meizi_item_big_title"
+        app:srcCompat="@drawable/time" />
+
+    <TextView
+        android:id="@+id/meizi_item_big_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="59:59"
+        app:layout_constraintBaseline_toBaselineOf="@+id/meizi_item_big_favorites"
+        app:layout_constraintStart_toEndOf="@+id/meizi_item_big_comments_icon" />
+</android.support.constraint.ConstraintLayout>
