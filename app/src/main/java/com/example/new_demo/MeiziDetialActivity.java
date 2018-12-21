@@ -1,4 +1,5 @@
 package com.example.new_demo;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
@@ -6,16 +7,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
 
 public class MeiziDetialActivity extends AppCompatActivity {
 
     public static final String LINKS="links";
+    public static final String Titles="title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +36,13 @@ public class MeiziDetialActivity extends AppCompatActivity {
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.detial_swipe);
         swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF4081"),Color.parseColor("#0066FF"));
 
+        FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+
         final WebView webView = (WebView) findViewById(R.id.web_view);
         setDefaultWebSettings(webView);
-
-        String link = getIntent().getStringExtra(LINKS);
+        webView.setWebViewClient(new WebViewClient());
+        final String link = getIntent().getStringExtra(LINKS);
+        final String title = getIntent().getStringExtra(Titles);
         webView.loadUrl(link);
 
         /**
@@ -67,6 +79,19 @@ public class MeiziDetialActivity extends AppCompatActivity {
             }
         });
 
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MeiziDetialActivity.this,"分享",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,title+"\r\n"+link);
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent,"分享到"));
+            }
+        });
 
     }
 

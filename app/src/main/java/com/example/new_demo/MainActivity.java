@@ -59,8 +59,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initIntro() {
-        Intent intent = new Intent(this, IntroActivity.class);
-        startActivity(intent);
+        SharedPreferences sp = getSharedPreferences("first", Context.MODE_PRIVATE);
+        if (!sp.getBoolean("first", false)) {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("first", true);
+            editor.apply();
+            Intent intent = new Intent(this, IntroActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void initadapter() {

@@ -97,6 +97,7 @@ public class MeiziAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private void startMeiziActivity(Meizi meizi) {
         Intent intent = new Intent(context, MeiziDetialActivity.class);
         intent.putExtra(MeiziDetialActivity.LINKS, meizi.getLinks());
+        intent.putExtra(MeiziDetialActivity.Titles,meizi.getTitle());
         context.startActivity(intent);
     }
 

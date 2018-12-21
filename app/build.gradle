@@ -30,4 +30,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'com.github.paolorotolo:appintro:v4.2.3'
+    implementation 'com.getbase:floatingactionbutton:1.9.0'
 }
