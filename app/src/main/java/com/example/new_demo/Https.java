@@ -29,8 +29,6 @@ public class Https {
        if (code==200){
            InputStream input = json.getInputStream();
            String result = convertStreamToString(input);
-           //输出
-//           Log.i("msg:", "https: "+result);
            input.close();
           return result;
        }else {

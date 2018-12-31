@@ -50,14 +50,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/duoyun" />
+                    app:srcCompat="@drawable/duoyun" />
 
                 <ImageView
                     android:id="@+id/nightPicture_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/duoyun_night" />
+                    app:srcCompat="@drawable/duoyun_night" />
 
                 <TextView
                     android:id="@+id/weather_1"
@@ -66,7 +66,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="多云转小雨"
+                    android:text="多云"
                     android:textSize="16dp" />
 
                 <TextView

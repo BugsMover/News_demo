@@ -3,17 +3,22 @@ package com.example.new_demo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -34,52 +39,19 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
     private TextView temperature_1,temperature_2,temperature_3,temperature_4;
     private TextView tipt_1,tipt_2,tipt_3,tipt_4,tipt_5;
     private TextView des_1,des_2,des_3,des_4,des_5;
+    private FloatingActionButton floatingActionButton;
     private String url="https://api.isoyu.com/index.php/api/Weather/get_weather?city=";
     private String Json;
     private JSONObject results;
     private String city;
+    private SharedPreferences sp;
     private final Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             super.handleMessage(msg);
             switch (msg.what){
                case 1:
-                try {
-                    String currentCity = results.getString("currentCity");
-                    int ipm25 =Integer.parseInt(results.getString("pm25"));
-                    JSONArray weather_data= results.getJSONArray("weather_data");
-                    JSONObject weather_data_job = weather_data.getJSONObject(0);
-                    String tempStr = weather_data_job.getString("date");
-                    temp.setText(tempStr.substring(tempStr.lastIndexOf("实时：")+3,tempStr.length()-1));
-                    if (0<=ipm25 && ipm25<=50){
-                        pm25.setText("空气质量:优");
-                    }else if (51<=ipm25 && ipm25<=100){
-                        pm25.setText("空气质量:良");
-                    }else if (101<=ipm25 && ipm25<=150){
-                        pm25.setText("空气质量:轻度污染");
-                    }else if (151<=ipm25 && ipm25<=200){
-                        pm25.setText("空气质量:中度污染");
-                    }else if (201<=ipm25 && ipm25<=300){
-                        pm25.setText("空气质量:重度污染");
-                    }else if (300<ipm25){
-                        pm25.setText("空气质量:严重污染");
-                    }
-                    collapsingToolbarLayout.setTitle(currentCity);
-                    setDate(date_1,1);
-                    setDate(date_2,2);
-                    setDate(date_3,3);
-                    setWeather(weather_1,temperature_1,dayPicture_1,nightPicture_1,1);
-                    setWeather(weather_2,temperature_2,dayPicture_2,nightPicture_2,2);
-                    setWeather(weather_3,temperature_3,dayPicture_3,nightPicture_3,3);
-                    setWeather(weather_4,temperature_4,dayPicture_4,nightPicture_4,4);
-                    setLife(tipt_1,des_1,1);
-                    setLife(tipt_2,des_2,2);
-                    setLife(tipt_3,des_3,3);
-                    setLife(tipt_4,des_4,4);
-                    setLife(tipt_5,des_5,5);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                setAll();
                 break;
             }
         }
@@ -88,39 +60,86 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_tetailed_scrolling);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        city = sp.getString("weather_city",null);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Json =  Https.https(url+city);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }finally {
-                        try {
-                            JSONObject job= new JSONObject(Json);
-                            JSONObject msg = job.getJSONObject("data");
-                            JSONArray results_ary = msg.getJSONArray("results");
-                            results  =results_ary.getJSONObject(0);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }finally {
-                         mHandler.sendEmptyMessage(1);
-                        }
-                    }
-                }
-            }).start();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getJsonData();
+
 
         initview();
         setSupportActionBar(toolbar);
-
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getJsonData();
+                Toast.makeText(WeatherTetailedScrollingActivity.this,
+                        "刷新完成！",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void getJsonData(){
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        city = sp.getString("weather_city","深圳");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Json =  Https.https(url+city);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }finally {
+                    try {
+                        JSONObject job= new JSONObject(Json);
+                        JSONObject msg = job.getJSONObject("data");
+                        Log.d("data", String.valueOf(msg));
+                        JSONArray results_ary = msg.getJSONArray("results");
+                        results  =results_ary.getJSONObject(0);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }finally {
+                        mHandler.sendEmptyMessage(1);
+                    }
+                }
+            }
+        }).start();
     }
 
-
-
-
-
+    private void setAll(){
+        try {
+            String currentCity = results.getString("currentCity");
+            int ipm25 =Integer.parseInt(results.getString("pm25"));
+            JSONArray weather_data= results.getJSONArray("weather_data");
+            JSONObject weather_data_job = weather_data.getJSONObject(0);
+            String tempStr = weather_data_job.getString("date");
+            temp.setText(tempStr.substring(tempStr.lastIndexOf("实时：")+3,tempStr.length()-1));
+            if (0<=ipm25 && ipm25<=50){
+                pm25.setText("空气质量:优");
+            }else if (51<=ipm25 && ipm25<=100){
+                pm25.setText("空气质量:良");
+            }else if (101<=ipm25 && ipm25<=150){
+                pm25.setText("空气质量:轻度污染");
+            }else if (151<=ipm25 && ipm25<=200){
+                pm25.setText("空气质量:中度污染");
+            }else if (201<=ipm25 && ipm25<=300){
+                pm25.setText("空气质量:重度污染");
+            }else if (300<ipm25){
+                pm25.setText("空气质量:严重污染");
+            }
+            collapsingToolbarLayout.setTitle(currentCity);
+            setDate(date_1,1);
+            setDate(date_2,2);
+            setDate(date_3,3);
+            setWeather(weather_1,temperature_1,dayPicture_1,nightPicture_1,1);
+            setWeather(weather_2,temperature_2,dayPicture_2,nightPicture_2,2);
+            setWeather(weather_3,temperature_3,dayPicture_3,nightPicture_3,3);
+            setWeather(weather_4,temperature_4,dayPicture_4,nightPicture_4,4);
+            setLife(tipt_1,des_1,1);
+            setLife(tipt_2,des_2,2);
+            setLife(tipt_3,des_3,3);
+            setLife(tipt_4,des_4,4);
+            setLife(tipt_5,des_5,5);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,7 +161,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }else if (id == R.id.action_finish){
-            System.exit(0);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -182,6 +201,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
         des_3 = (TextView) findViewById(R.id.des_3);
         des_4 = (TextView) findViewById(R.id.des_4);
         des_5 = (TextView) findViewById(R.id.des_5);
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab_Refresh);
     }
 
     private void setDate(TextView dateView,int i) throws JSONException {

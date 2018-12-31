@@ -16,35 +16,28 @@ public class IntroActivity extends AppIntro2 {
         super.onCreate(savedInstanceState);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏
 
         SliderPage sliderPage1 = new SliderPage();
-        sliderPage1.setTitle("Welcome!");
-        sliderPage1.setDescription("This is a demo of the AppIntro library.");
-        sliderPage1.setImageDrawable(R.drawable.planet_earth);
+        sliderPage1.setTitle("天气简报");
+        sliderPage1.setDescription("查看资讯"+"\r\n"+"从天气开始");
+        sliderPage1.setImageDrawable(R.drawable.show_1);
         sliderPage1.setBgColor(Color.parseColor("#3498DB"));
         addSlide(AppIntroFragment.newInstance(sliderPage1));
 
         SliderPage sliderPage2 = new SliderPage();
-        sliderPage2.setTitle("Clean App Intros");
-        sliderPage2.setDescription("This library offers developers the ability to add clean app intros at the start of their apps.");
-        sliderPage2.setImageDrawable(R.drawable.jupiter);
+        sliderPage2.setTitle("新闻列表");
+        sliderPage2.setDescription("发现最新资讯"+"\r\n"+"直击焦点");
+        sliderPage2.setImageDrawable(R.drawable.show_2);
         sliderPage2.setBgColor(Color.parseColor("#28B463"));
         addSlide(AppIntroFragment.newInstance(sliderPage2));
 
         SliderPage sliderPage3 = new SliderPage();
-        sliderPage3.setTitle("Simple, yet Customizable");
-        sliderPage3.setDescription("The library offers a lot of customization, while keeping it simple for those that like simple.");
-        sliderPage3.setImageDrawable(R.drawable.venus);
+        sliderPage3.setTitle("详细天气");
+        sliderPage3.setDescription("关注天气"+"\r\n"+"安全出行");
+        sliderPage3.setImageDrawable(R.drawable.show_3);
         sliderPage3.setBgColor(Color.parseColor("#884EA0"));
         addSlide(AppIntroFragment.newInstance(sliderPage3));
-
-        SliderPage sliderPage4 = new SliderPage();
-        sliderPage4.setTitle("Explore");
-        sliderPage4.setDescription("Feel free to explore the rest of the library demo!");
-        sliderPage4.setImageDrawable(R.drawable.haha);
-        sliderPage4.setBgColor(Color.TRANSPARENT);
-        addSlide(AppIntroFragment.newInstance(sliderPage4));
 
         showSkipButton(false);
 

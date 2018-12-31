@@ -33,7 +33,7 @@
             android:id="@+id/city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="广州市"
+            android:text=""
             android:textSize="35sp" />
 
         <LinearLayout
@@ -45,14 +45,14 @@
                 android:id="@+id/temp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="16℃"
+                android:text=""
                 android:textSize="50sp" />
 
             <TextView
                 android:id="@+id/weather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="阴"
+                android:text=""
                 android:textSize="20sp" />
         </LinearLayout>
 

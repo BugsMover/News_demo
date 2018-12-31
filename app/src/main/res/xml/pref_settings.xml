@@ -15,7 +15,7 @@
           android:entryValues="@array/list_weather_city"
           android:key="weather_city"
           android:title="选择城市"
-          android:defaultValue="广州"
+          android:defaultValue="深圳"
           android:summary="%s"/>
   </PreferenceCategory>
 

@@ -22,15 +22,15 @@ public class AboutActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window window = getWindow();
-        window.setStatusBarColor(Color.parseColor("#24292e"));
+        window.setStatusBarColor(Color.parseColor("#24292e"));//改变通知栏颜色
         setContentView(R.layout.activity_meizi_detial);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.detial_swipe);
-        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF4081"),Color.parseColor("#0066FF"));
-        FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-        floatingActionButton.setVisibility(View.GONE);
-        WebView webView = (WebView)findViewById(R.id.web_view);
-        MeiziDetialActivity.setDefaultWebSettings(webView);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.detial_swipe);//初始化下拉刷新控件
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF4081"),Color.parseColor("#0066FF"));//下拉刷新圈圈混合色
+        FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);//初始化悬浮按钮
+        floatingActionButton.setVisibility(View.GONE);//GONE隐藏悬浮按钮，消除位置占用
+        WebView webView = (WebView)findViewById(R.id.web_view);//web控件
+        MeiziDetialActivity.setDefaultWebSettings(webView);//调用MeiziDetialActivity的setDefaultWebSettings方法
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
     }

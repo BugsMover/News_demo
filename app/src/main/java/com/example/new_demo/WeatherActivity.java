@@ -3,6 +3,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,6 +30,28 @@ public class WeatherActivity extends AppCompatActivity {
     String CurrentCity;
     private MyCountDownTimer myCountDownTimer;
     String url = "https://api.isoyu.com/index.php/api/Weather/get_weather?city=";
+    private final Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    initview();
+                    myCountDownTimer= new MyCountDownTimer(3500,1000);
+                    myCountDownTimer.start();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myCountDownTimer.cancel();
+//                Intent intent = new  Intent(WeatherActivity.this,MainActivity.class);;
+//                startActivity(intent);
+                            WeatherActivity.this.finish();
+                        }
+                    });
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         json_weather();
@@ -36,23 +60,7 @@ public class WeatherActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_weather);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        initview();
-                myCountDownTimer= new MyCountDownTimer(3500,1000);
-                myCountDownTimer.start();
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myCountDownTimer.cancel();
-//                Intent intent = new  Intent(WeatherActivity.this,MainActivity.class);;
-//                startActivity(intent);
-                        WeatherActivity.this.finish();
-                    }
-                });
+
     }
 
     private void json_weather() {
@@ -60,7 +68,7 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void run() {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                String city = sp.getString("weather_city","广州");
+                String city = sp.getString("weather_city","深圳");
                 try {
               json = Https.https(url+city);
                 } catch (IOException e) {
@@ -89,6 +97,8 @@ public class WeatherActivity extends AppCompatActivity {
                          Weather = weather_data_job.getString("weather");
 //                        System.out.println(Weather);
                     }catch (JSONException e){
+                    }finally {
+                        mHandler.sendEmptyMessage(1);
                     }
                 }
             }
