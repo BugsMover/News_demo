@@ -36,10 +36,13 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    // 初始化handle，绑定在主线程中的队列消息中
     private final Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             super.handleMessage(msg);
+            // 接收消息
             switch (msg.what){
                 case 1:
                     initadapter();
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         initIntro();//第一次启动引导页
         initView();
         new Https(this);
+
+        // 创建子线程，在子线程中处理耗时工作
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -81,13 +86,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        drawerToggle = new ActionBarDrawerToggle(this,drawerlayout,toolbar,R.string.open,R.string.close);
+        drawerToggle = new ActionBarDrawerToggle(this,drawerlayout,toolbar,R.string.open,R.string.close);//toolbar左边的“三”图标，单击变成箭头
+        //侧滑栏
         drawerlayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                drawerlayout.closeDrawer(GravityCompat.START);
+                drawerlayout.closeDrawer(GravityCompat.START);//点击收回侧滑栏
                 int id = menuItem.getItemId();
                 switch (id){
                     case R.id.drawer_weather_detailed:
@@ -102,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                         System.exit(0);
                         return true;
                     case R.id.drawer_about:
-//                        Toast.makeText(getBaseContext(),"关于",Toast.LENGTH_LONG).show();
                         Intent intent_about = new Intent(MainActivity.this,AboutActivity.class);
                         startActivity(intent_about);
                         return true;
@@ -116,12 +121,14 @@ public class MainActivity extends AppCompatActivity {
     private void initIntro() {
         SharedPreferences sp_first = getSharedPreferences("first", Context.MODE_PRIVATE);
         if (!sp_first.getBoolean("first", false)) {
+            //引导页启动一次
             SharedPreferences.Editor editor = sp_first.edit();
             editor.putBoolean("first", true);
             editor.apply();
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);
         } else {
+            //天气页打开和关闭设置
             SharedPreferences sp_switched = PreferenceManager.getDefaultSharedPreferences(this);
             boolean switched = sp_switched.getBoolean("weather_switch", true);
             if (switched) {
@@ -130,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private void initadapter() {
         int num = MeiziFactory.imageUrls.length;
@@ -150,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         drawerlayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
+        //下拉刷新监听，刷新新闻列表
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -171,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }finally {
+                            //取消刷新的圈圈
                             mHandler.sendEmptyMessage(2);
                         }
                     }
@@ -179,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //toolbar 右边的menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toobar, menu);

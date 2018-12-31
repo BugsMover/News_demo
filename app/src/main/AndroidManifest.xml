@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.new_demo">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/news"
@@ -30,7 +32,6 @@
         <activity android:name=".AboutActivity" />
         <activity
             android:name=".WeatherTetailedScrollingActivity"
-            android:label="@string/title_activity_weather_tetailde_scrolling"
             android:theme="@style/AppTheme"></activity>
     </application>
 

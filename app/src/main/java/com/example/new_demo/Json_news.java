@@ -6,7 +6,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Json_news {
-
+    /**
+     * json解析
+     * @param json
+     * @throws JSONException
+     */
     public static void json(String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
         JSONObject obj1 = obj.getJSONObject("data");
@@ -62,7 +66,12 @@ public class Json_news {
         }
     }
 
-    //
+    /**
+     * 字符串写入字符串数组
+     * @param arr
+     * @param str
+     * @return
+     */
     private static String[] insert(String[] arr, String str) {
         int size = arr.length;  //获取数组长度
         String[] tmp = new String[size + 1];  //新建临时字符串数组，在原来基础上长度加一

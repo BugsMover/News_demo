@@ -45,10 +45,12 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
     private JSONObject results;
     private String city;
     private SharedPreferences sp;
+    // 初始化handle，绑定在主线程中的队列消息中
     private final Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             super.handleMessage(msg);
+            // 接收消息
             switch (msg.what){
                case 1:
                 setAll();
@@ -62,10 +64,9 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather_tetailed_scrolling);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getJsonData();
-
-
         initview();
         setSupportActionBar(toolbar);
+        //刷新天气
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,9 +76,12 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
             }
         });
     }
+
+    //获取json信息，并解析部分
     private void getJsonData(){
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         city = sp.getString("weather_city","深圳");
+        // 创建子线程，在子线程中处理耗时工作
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -102,6 +106,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
         }).start();
     }
 
+    //解析json信息，并到控件上
     private void setAll(){
         try {
             String currentCity = results.getString("currentCity");
@@ -204,12 +209,14 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fab_Refresh);
     }
 
+    //减少代码写的方法
     private void setDate(TextView dateView,int i) throws JSONException {
         JSONArray weather_data= results.getJSONArray("weather_data");
         JSONObject weather_data_job = weather_data.getJSONObject(i);
         String date = weather_data_job.getString("date").substring(0,2);
         dateView.setText(date);
     }
+    //减少代码写的方法
     private void setWeather(TextView weahter,TextView temperature,ImageView dayPicture,
                             ImageView nightPicture,int i) throws JSONException {
         JSONArray weather_data= results.getJSONArray("weather_data");
@@ -221,6 +228,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
 
         weahter.setText(weatherStr);
         temperature.setText(temperatureStr);
+        //加载网络图片
         Glide
                 .with(this)
                 .load(dayUrl)
@@ -231,6 +239,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
                 .into(nightPicture);
     }
 
+    //减少代码写的方法
     private void setLife(TextView tipt,TextView des, int i) throws JSONException {
             JSONArray  index = results.getJSONArray("index");
             JSONObject indexjob = index.getJSONObject(i);

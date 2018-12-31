@@ -10,6 +10,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="地理位置">
+        <!-- "%s"选择后summary显示选项-->
         <ListPreference
           android:entries="@array/list_weather_city"
           android:entryValues="@array/list_weather_city"

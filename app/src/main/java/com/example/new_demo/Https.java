@@ -38,13 +38,18 @@ public class Https {
 
    }
 
+    /**
+     * To convert the InputStream to String we use the
+     * BufferedReader.readLine() method. We iterate until the BufferedReader
+     * return null which means there's no more data to read. Each line will
+     * appended to a StringBuilder and returned as String.
+     * 要将InputStream转换为String，我们使用
+     * BufferedReader.readLine（）方法。
+     * 我们迭代直到BufferedReader返回null表示没有更多数据可供阅读。
+     * 每一行都会附加到StringBuilder并作为String返回。
+     */
     public static String convertStreamToString(InputStream is) {
-        /*
-         * To convert the InputStream to String we use the
-         * BufferedReader.readLine() method. We iterate until the BufferedReader
-         * return null which means there's no more data to read. Each line will
-         * appended to a StringBuilder and returned as String.
-         */
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 

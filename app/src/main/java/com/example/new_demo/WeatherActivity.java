@@ -30,10 +30,13 @@ public class WeatherActivity extends AppCompatActivity {
     String CurrentCity;
     private MyCountDownTimer myCountDownTimer;
     String url = "https://api.isoyu.com/index.php/api/Weather/get_weather?city=";
+
+    // 初始化handle，绑定在主线程中的队列消息中
     private final Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            // 接收消息
             switch (msg.what){
                 case 1:
                     initview();
@@ -41,11 +44,8 @@ public class WeatherActivity extends AppCompatActivity {
                     myCountDownTimer.start();
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
-                            myCountDownTimer.cancel();
-//                Intent intent = new  Intent(WeatherActivity.this,MainActivity.class);;
-//                startActivity(intent);
-                            WeatherActivity.this.finish();
+                        public void onClick(View v) { myCountDownTimer.cancel();
+                    WeatherActivity.this.finish();
                         }
                     });
                     break;
@@ -64,6 +64,8 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     private void json_weather() {
+
+        // 创建子线程，在子线程中处理耗时工作
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -76,26 +78,15 @@ public class WeatherActivity extends AppCompatActivity {
                 }finally {
                     try {
                         JSONObject job= new JSONObject(json);
-//		System.out.println(job);
                         JSONObject msg = job.getJSONObject("data");
-//		System.out.println(msg);
                         JSONArray results_ary = msg.getJSONArray("results");
-//		System.out.println(results_ary);
                         JSONObject results  =results_ary.getJSONObject(0);
-//		System.out.println(results);
                         CurrentCity = results.getString("currentCity");
-//                        System.out.println(CurrentCity);
-
                         JSONArray weather_data= results.getJSONArray("weather_data");
-//		System.out.println(weather_data);
                         JSONObject weather_data_job = weather_data.getJSONObject(0);
-//		System.out.println(weather_data_job);
                      String  temp = weather_data_job.getString("date");
                        Temp = temp.substring(temp.lastIndexOf("实时：")+3,temp.length()-1);
-//                        System.out.println(Temp);
-
                          Weather = weather_data_job.getString("weather");
-//                        System.out.println(Weather);
                     }catch (JSONException e){
                     }finally {
                         mHandler.sendEmptyMessage(1);
@@ -106,16 +97,10 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     private void initview() {
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         weather = (TextView) findViewById(R.id.weather);
        city = (TextView) findViewById(R.id.city);
        temp = (TextView) findViewById(R.id.temp);
        button = (Button) findViewById(R.id.button);
-
 
         weather.setText(Weather);
         city.setText(CurrentCity);
@@ -148,8 +133,6 @@ public class WeatherActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-//            Intent intent = new  Intent(WeatherActivity.this,MainActivity.class);;
-//            startActivity(intent);
             WeatherActivity.this.finish();
         }
     }

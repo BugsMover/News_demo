@@ -28,7 +28,7 @@ public class MeiziDetialActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏状态栏
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meizi_detial);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏
@@ -86,9 +86,9 @@ public class MeiziDetialActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MeiziDetialActivity.this,"分享",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
+                intent.setAction(Intent.ACTION_SEND);//调用系统的分享功能
                 intent.putExtra(Intent.EXTRA_TEXT,title+"\r\n"+link);
-                intent.setType("text/plain");
+                intent.setType("text/plain");//文本类型
                 startActivity(Intent.createChooser(intent,"分享到"));
             }
         });
