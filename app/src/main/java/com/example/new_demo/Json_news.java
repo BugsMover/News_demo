@@ -5,7 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Json{
+public class Json_news {
 
     public static void json(String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
@@ -56,12 +56,13 @@ public class Json{
                     String url = obj3.getString("url");
                     MeiziFactory.imageUrls = insert(MeiziFactory.imageUrls,url);
 
-                    System.out.println(i+":"+link+"/"+source+"/"+title+"/"+ptime+"/"+url);
+//                    System.out.println(i+":"+link+"/"+source+"/"+title+"/"+ptime+"/"+url);
                 }
             }
         }
     }
 
+    //
     private static String[] insert(String[] arr, String str) {
         int size = arr.length;  //获取数组长度
         String[] tmp = new String[size + 1];  //新建临时字符串数组，在原来基础上长度加一

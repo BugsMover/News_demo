@@ -41,7 +41,7 @@
         android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
-        android:text="汽车"
+        android:text="类型"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/meizi_item_small_favorites_icon" />
 
@@ -88,7 +88,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="网易汽车"
+        android:text="来源"
         app:layout_constraintBottom_toTopOf="@+id/meizi_item_small_favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/meizi_item_small_name_icon" />
@@ -102,7 +102,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
         android:maxLines="2"
-        android:text="油耗气死加油站老板 亚洲龙混动版来了"
+        android:text="标题"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/meizi_item_small_name"

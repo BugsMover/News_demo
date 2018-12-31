@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="key_root">
+
+    <PreferenceCategory android:title="天气简报">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="weather_switch"
+            android:title="打开/关闭" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="地理位置">
+        <ListPreference
+          android:entries="@array/list_weather_city"
+          android:entryValues="@array/list_weather_city"
+          android:key="weather_city"
+          android:title="选择城市"
+          android:defaultValue="广州"
+          android:summary="%s"/>
+  </PreferenceCategory>
+
+    <PreferenceCategory android:title="信息">
+        <Preference
+            android:title="版本"
+            android:summary="1.0">
+        </Preference>
+
+        <Preference
+            android:title="关于"
+            android:summary="https://github.com/ComeOnKissMe/New_demo">
+              <intent
+                  android:action="android.intent.action.VIEW"
+                  android:data="https://github.com/ComeOnKissMe/New_demo"
+                  />
+        </Preference>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
