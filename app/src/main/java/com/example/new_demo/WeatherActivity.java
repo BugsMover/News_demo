@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,21 +41,14 @@ public class WeatherActivity extends AppCompatActivity {
             switch (msg.what){
                 case 1:
                     initview();
-                    myCountDownTimer= new MyCountDownTimer(3500,1000);
-                    myCountDownTimer.start();
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) { myCountDownTimer.cancel();
-                    WeatherActivity.this.finish();
-                        }
-                    });
+                    initDownTime();
                     break;
             }
         }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        json_weather();
+            json_weather();
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -76,20 +70,24 @@ public class WeatherActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }finally {
-                    try {
-                        JSONObject job= new JSONObject(json);
-                        JSONObject msg = job.getJSONObject("data");
-                        JSONArray results_ary = msg.getJSONArray("results");
-                        JSONObject results  =results_ary.getJSONObject(0);
-                        CurrentCity = results.getString("currentCity");
-                        JSONArray weather_data= results.getJSONArray("weather_data");
-                        JSONObject weather_data_job = weather_data.getJSONObject(0);
-                     String  temp = weather_data_job.getString("date");
-                       Temp = temp.substring(temp.lastIndexOf("实时：")+3,temp.length()-1);
-                         Weather = weather_data_job.getString("weather");
-                    }catch (JSONException e){
-                    }finally {
-                        mHandler.sendEmptyMessage(1);
+                    if (json!=null) {
+                        try {
+                            JSONObject job = new JSONObject(json);
+                            JSONObject msg = job.getJSONObject("data");
+                            JSONArray results_ary = msg.getJSONArray("results");
+                            JSONObject results = results_ary.getJSONObject(0);
+                            CurrentCity = results.getString("currentCity");
+                            JSONArray weather_data = results.getJSONArray("weather_data");
+                            JSONObject weather_data_job = weather_data.getJSONObject(0);
+                            String temp = weather_data_job.getString("date");
+                            Temp = temp.substring(temp.lastIndexOf("实时：") + 3, temp.length() - 1);
+                            Weather = weather_data_job.getString("weather");
+                        } catch (JSONException e) {
+                        } finally {
+                            mHandler.sendEmptyMessage(1);
+                        }
+                    }else {
+                        WeatherActivity.this.finish();
                     }
                 }
             }
@@ -105,6 +103,17 @@ public class WeatherActivity extends AppCompatActivity {
         weather.setText(Weather);
         city.setText(CurrentCity);
         temp.setText(Temp);
+    }
+
+    private void initDownTime(){
+        myCountDownTimer= new MyCountDownTimer(3500,1000);
+        myCountDownTimer.start();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { myCountDownTimer.cancel();
+                WeatherActivity.this.finish();
+            }
+        });
     }
 
 

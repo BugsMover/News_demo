@@ -1,12 +1,16 @@
 package com.example.new_demo;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 public class Https {
@@ -26,16 +30,14 @@ public class Https {
        // 设置从主机读取数据超时（单位：毫秒）
        json.setReadTimeout(2000);
        int code = json.getResponseCode();
-       if (code==200){
+       if (code==HttpURLConnection.HTTP_OK){
            InputStream input = json.getInputStream();
            String result = convertStreamToString(input);
            input.close();
           return result;
        }else {
-           Toast.makeText(mContext,"数据加载失败!",Toast.LENGTH_LONG).show();
-           return null;
+           return String.valueOf(0);
        }
-
    }
 
     /**

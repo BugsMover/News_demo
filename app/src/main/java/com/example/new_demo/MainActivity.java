@@ -18,6 +18,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
     private SwipeRefreshLayout swipeRefreshLayout;
+
 
     // 初始化handle，绑定在主线程中的队列消息中
     private final Handler mHandler = new Handler(){
@@ -65,19 +67,25 @@ public class MainActivity extends AppCompatActivity {
         initIntro();//第一次启动引导页
         initView();
         new Https(this);
-
         // 创建子线程，在子线程中处理耗时工作
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Json_news.json(Https.https(url_news));
+                String str =  Https.https(url_news);
+                    Log.d("111111111",str);
+                    if (str!=null) {
+                        Json_news.json(str);
+                        mHandler.sendEmptyMessage(1);
+                    }else {
+                        Toast.makeText(MainActivity.this,"数据获取失败，请检查网络，或者稍后再试！",Toast.LENGTH_LONG).show();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }finally {
-                    mHandler.sendEmptyMessage(1);
+
                 }
             }
         }).start();

@@ -92,6 +92,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }finally {
+                    if (Json !=null){
                     try {
                         JSONObject job= new JSONObject(Json);
                         JSONObject msg = job.getJSONObject("data");
@@ -100,8 +101,9 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
                         mHandler.sendEmptyMessage(1);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }finally {
-
+                    }
+                   }else {
+                        Toast.makeText(WeatherTetailedScrollingActivity.this,"数据获取失败，请检查网络，或者稍后再试！",Toast.LENGTH_LONG).show();
                     }
                 }
             }
