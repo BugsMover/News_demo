@@ -36,28 +36,25 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textview_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="今天"
                     android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/dayPicture_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun" />
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/nightPicture_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun_night" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/weather_1"
@@ -66,18 +63,16 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="多云"
                     android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/temperature_1"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="1 ~ 8℃" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -93,22 +88,19 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="周日" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/dayPicture_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun" />
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/nightPicture_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun_night" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/weather_2"
@@ -117,7 +109,6 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="多云"
                     android:textSize="16dp" />
 
                 <TextView
@@ -127,8 +118,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="13 ~ 8℃" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -145,22 +135,19 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="周日" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/dayPicture_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun" />
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/nightPicture_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun_night" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/weather_3"
@@ -169,8 +156,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="多云" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/temperature_3"
@@ -179,8 +165,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="13 ~ 8℃" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -196,22 +181,19 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="周日" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/dayPicture_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun" />
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/nightPicture_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/duoyun_night" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/weather_4"
@@ -220,8 +202,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="多云" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/temperature_4"
@@ -230,8 +211,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:text="13 ~ 8℃" />
+                    android:textSize="16dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -239,86 +219,81 @@
             android:id="@+id/tipt_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:text="穿衣指数：较冷" />
+            android:text="穿衣指数："
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/des_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
             android:layout_margin="10dp"
-            android:textSize="16dp"
-            android:text="建议着厚外套加毛衣等服装。年老体弱者宜着大衣、呢外套加羊毛衫。" />
+            android:background="@drawable/rounded_border"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tipt_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:text="洗车指数：较适宜" />
+            android:text="洗车指数："
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/des_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
             android:layout_margin="10dp"
-            android:textSize="16dp"
-            android:text="较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。" />
+            android:background="@drawable/rounded_border"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tipt_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:text="感冒指数：少发" />
+            android:text="感冒指数："
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/des_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
             android:layout_margin="10dp"
-            android:textSize="16dp"
-            android:text="各项气象条件适宜，无明显降温过程，发生感冒机率较低。" />
+            android:background="@drawable/rounded_border"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tipt_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:text="运动指数：较适宜" />
+            android:text="运动指数："
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/des_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
             android:layout_margin="10dp"
-            android:textSize="16dp"
-            android:text="天气较好，无雨水困扰，较适宜进行各种运动，但因气温较低，在户外运动请注意增减衣物。" />
+            android:background="@drawable/rounded_border"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tipt_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:text="紫外线强度指数：最弱" />
+            android:text="紫外线强度指数："
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/des_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
             android:layout_margin="10dp"
-            android:textSize="16dp"
-            android:text="属弱紫外线辐射天气，无需特别防护。若长期在户外，建议涂擦SPF在8-12之间的防晒护肤品。" />
+            android:background="@drawable/rounded_border"
+            android:textSize="16dp" />
 
     </LinearLayout>
 

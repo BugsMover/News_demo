@@ -32,7 +32,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private TextView temp,pm25;
-    private TextView date_1,date_2,date_3;
+    private TextView date_1,date_2,date_3,textview_day;
     private ImageView dayPicture_1,dayPicture_2,dayPicture_3,dayPicture_4;
     private ImageView nightPicture_1,nightPicture_2,nightPicture_3,nightPicture_4;
     private TextView weather_1,weather_2,weather_3,weather_4;
@@ -53,8 +53,9 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
             // 接收消息
             switch (msg.what){
                case 1:
-                setAll();
+                   setAll();
                 break;
+
             }
         }
     };
@@ -66,6 +67,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
         getJsonData();
         initview();
         setSupportActionBar(toolbar);
+        collapsingToolbarLayout.setTitle("天气");
         //刷新天气
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +95,13 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
                     try {
                         JSONObject job= new JSONObject(Json);
                         JSONObject msg = job.getJSONObject("data");
-                        Log.d("data", String.valueOf(msg));
                         JSONArray results_ary = msg.getJSONArray("results");
                         results  =results_ary.getJSONObject(0);
+                        mHandler.sendEmptyMessage(1);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }finally {
-                        mHandler.sendEmptyMessage(1);
+
                     }
                 }
             }
@@ -129,18 +131,20 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
                 pm25.setText("空气质量:严重污染");
             }
             collapsingToolbarLayout.setTitle(currentCity);
+            textview_day.setText("今天");
             setDate(date_1,1);
             setDate(date_2,2);
             setDate(date_3,3);
-            setWeather(weather_1,temperature_1,dayPicture_1,nightPicture_1,1);
-            setWeather(weather_2,temperature_2,dayPicture_2,nightPicture_2,2);
-            setWeather(weather_3,temperature_3,dayPicture_3,nightPicture_3,3);
-            setWeather(weather_4,temperature_4,dayPicture_4,nightPicture_4,4);
-            setLife(tipt_1,des_1,1);
-            setLife(tipt_2,des_2,2);
-            setLife(tipt_3,des_3,3);
-            setLife(tipt_4,des_4,4);
-            setLife(tipt_5,des_5,5);
+
+            setWeather(weather_1,temperature_1,dayPicture_1,nightPicture_1,0);
+            setWeather(weather_2,temperature_2,dayPicture_2,nightPicture_2,1);
+            setWeather(weather_3,temperature_3,dayPicture_3,nightPicture_3,2);
+            setWeather(weather_4,temperature_4,dayPicture_4,nightPicture_4,3);
+            setLife(tipt_1,des_1,0);
+            setLife(tipt_2,des_2,1);
+            setLife(tipt_3,des_3,2);
+            setLife(tipt_4,des_4,3);
+            setLife(tipt_5,des_5,4);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -180,6 +184,7 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
         date_1 = (TextView) findViewById(R.id.date_1);
         date_2 = (TextView) findViewById(R.id.date_2);
         date_3 = (TextView) findViewById(R.id.date_3);
+        textview_day = (TextView)findViewById(R.id.textview_today);
         dayPicture_1 = (ImageView) findViewById(R.id.dayPicture_1);
         dayPicture_2 = (ImageView) findViewById(R.id.dayPicture_2);
         dayPicture_3 = (ImageView) findViewById(R.id.dayPicture_3);
@@ -242,10 +247,12 @@ public class WeatherTetailedScrollingActivity extends AppCompatActivity {
     //减少代码写的方法
     private void setLife(TextView tipt,TextView des, int i) throws JSONException {
             JSONArray  index = results.getJSONArray("index");
+            Log.d("index", String.valueOf(index));
             JSONObject indexjob = index.getJSONObject(i);
             String desStr = indexjob.getString("des");
             String tiptStr = indexjob.getString("tipt");
             String zsStr = indexjob.getString("zs");
+             Log.d("index", desStr + tiptStr + zsStr );
             tipt.setText(tiptStr+"："+zsStr);
             des.setText(desStr);
     }
