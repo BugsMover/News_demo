@@ -56,3 +56,48 @@ demo里写了四个城市作为演示，可以values.arrays.xml添加城市
 简单的实时天气可以在设置里面关闭
 
 ![](https://github.com/ComeOnKissMe/News_demo/blob/master/gif/Switch.gif)
+
+"关于"分两种方法点击跳转到Github的demo上
+
+![](https://github.com/ComeOnKissMe/News_demo/blob/master/gif/about.gif)
+![](https://github.com/ComeOnKissMe/News_demo/blob/master/gif/about1.gif)
+
+用法：
+=====
+
+将JitPack存储库添加到构建文件中。将其添加到存储库末尾的根build.gradle中：
+
+
+allprojects {
+
+		repositories {
+  
+			...
+   
+			maven { url "https://jitpack.io" }
+   
+		}
+  
+	}
+ 
+添加的依赖项
+
+dependencies {
+
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    
+	   implementation 'com.github.bumptech.glide:glide:4.7.1'
+    
+    implementation 'com.github.paolorotolo:appintro:v4.2.3'
+    
+    implementation 'com.getbase:floatingactionbutton:1.9.0'
+    
+    implementation group: 'com.android.support', name: 'preference-v7', version: '28.0.0'
+    
+    implementation 'com.android.support:design:28.0.0'
+    
+	}
+ 
+ 另外
+ =====
+ 代码有注释，没有注释的请看上方的链接！！！
